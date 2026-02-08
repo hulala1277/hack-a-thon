@@ -1,0 +1,29 @@
+# Core framework
+fastapi
+uvicorn
+
+# Templating & static files
+jinja2
+aiofiles
+
+# Database
+sqlalchemy
+
+# Validation & settings
+pydantic
+python-dotenv
+
+# Security & auth
+passlib[bcrypt]
+python-jose[cryptography]
+
+# HTTP & utilities
+requests
+
+# Data & AI
+pandas
+
+# AI API
+openai
+# Optional: For development and testing
+pytest
