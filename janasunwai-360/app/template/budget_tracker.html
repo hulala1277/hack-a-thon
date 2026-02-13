@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Budget Tracker | Janasunwai{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center flex-col p-6 m-4 rounded-lg bg-white/90 w-full max-w-xl">
+
+    <span
+      style="font-family: 'Unica One', sans-serif;"
+      class="p-4 text-5xl font-semibold text-blue-700">
+        {{ site_name }}
+    </span>
+
+    <span
+      style="font-family: 'Nunito Sans', sans-serif;"
+      class="text-2xl font-semibold text-gray-900 mb-6">
+        Budget Tracker
+    </span>
+
+    <div class="flex flex-col space-y-4 w-full text-center">
+        <div class="flex justify-between items-center border-2 border-gray-900 rounded-lg p-3">
+            <span class="text-xl font-semibold">Total Budget</span>
+            <span class="text-3xl font-bold text-blue-700">NPR {{ total_budget }}</span>
+        </div>
+
+        <div class="flex justify-between items-center border-2 border-gray-900 rounded-lg p-3">
+            <span class="text-xl font-semibold">Total Spent</span>
+            <span class="text-3xl font-bold text-blue-700">NPR {{ total_spent }}</span>
+        </div>
+
+        <div class="flex justify-between items-center border-2 border-gray-900 rounded-lg p-3">
+            <span class="text-xl font-semibold">Remaining</span>
+            <span class="text-3xl font-bold text-blue-700">NPR {{ remaining }}</span>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
