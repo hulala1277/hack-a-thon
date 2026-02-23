@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Janasunwai{% endblock %}
+
+{% block content %}
+<div class="relative m-4 p-4 rounded-lg flex flex-col items-center justify-start bg-white w-fit">
+  <span style="font-family: 'Unica One', sans-serif;" 
+        class="p-4 text-5xl font-bold text-blue-700">
+    {{ site_name }}
+  </span>
+
+  <span id="SpeakUpText" 
+  style="font-family: 'Nunito Sans', sans-serif;" 
+        class="p-4 text-xl text-blue-700 text-center mb-5">
+    Admin Dashboard
+  </span>
+
+  {% for post in posts %}
+  <div class="bg-white w-[90%] rounded-lg flex flex-col border border-blue-500 p-5 mb-6 shadow-sm">
+
+    <h2 class="font-bold mb-3 underline text-blue-700">Issue Report</h2>
+    <h1 class="text-2xl font-semibold text-blue-800 mb-2">{{ post.title }}</h1>
+
+    <div class="text-blue-700 flex flex-col justify-start items-start space-y-1">
+        <p><b>Province:</b> {{ post.province }}</p>
+        <p><b>District:</b> {{ post.district }}</p>
+        <p><b>Municipality:</b> {{ post.municipality }}</p>
+    </div>
+
+    <p class="text-gray-800 mt-3">{{ post.description }}</p>
+
+    {% if post.image_url %}
+        <img src="{{ post.image_url }}" class="rounded-lg w-full object-cover mt-4">
+    {% elif post.image %}
+        <img src="{{ url_for('static', filename='uploads/' + post.image) }}" class="rounded-lg w-full object-cover mt-4">
+    {% endif %}
+
+    <form action="{{ url_for('up_vote', issue_id=post.id) }}" method="POST" class="mt-4">
+        <button type="submit" class="bg-blue-100 w-fit h-fit text-blue-700 text-2xl hover:bg-blue-500 active:bg-blue-700 active:text-white transform transition scale-110">
+            <span class="material-symbols-outlined">recommend</span>
+            <span class="mb-1">{{ post.upvotes or 0 }}</span>
+        </button>
+    </form>
+
+    {% if post.admin_notes %}
+        <p class="mt-2"><b>Admin Notes:</b> {{ post.admin_notes }}</p>
+    {% endif %}
+    {% if post.delay_reason %}
+        <p><b>Delay Reason:</b> {{ post.delay_reason }}</p>
+    {% endif %}
+    {% if post.estimated_resolution %}
+        <p><b>Estimated Resolution:</b> {{ post.estimated_resolution }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('update_issue', issue_id=post.id) }}" method="POST" class="mt-4 flex flex-col space-y-2">
+        <select name="status" class="p-2 border border-blue-700 rounded text-blue-700">
+            <option value="open" {% if post.status=='open' %}selected{% endif %}>Open</option>
+            <option value="in_review" {% if post.status=='in_review' %}selected{% endif %}>In Review</option>
+            <option value="resolved" {% if post.status=='resolved' %}selected{% endif %}>Resolved</option>
+            <option value="closed" {% if post.status=='closed' %}selected{% endif %}>Closed</option>
+        </select>
+        <label class="text-blue-700 text-xl font-semibold" for="admin_notes">Admin Notes:</label>
+        <input type="text" name="admin_notes" placeholder="Admin notes" value="{{ post.admin_notes or '' }}" class="p-2 border border-blue-700 rounded text-blue-700">
+
+        <label class="text-blue-700 text-xl font-semibold" for="delay_reason">Delay Reason:</label>
+        <input type="text" name="delay_reason" placeholder="Delay reason" value="{{ post.delay_reason or '' }}" class="p-2 border border-blue-700 rounded text-blue-700">
+
+        <label class="text-blue-700 text-xl  font-semibold" for="estimated_resolution">Estimated time of resolution:</label>
+        <input type="date" name="estimated_resolution" value="{{ post.estimated_resolution or '' }}" class="p-2 border border-blue-700 rounded text-blue-700">
+
+        <button type="submit" class="bg-blue-700 text-white p-2 rounded text-xl hover:bg-blue-900 active:bg-blue-900 transform transition scale-110">
+            Update
+        </button>
+    </form>
+
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock %}

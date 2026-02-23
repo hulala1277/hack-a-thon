@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login | Janasunwai 360{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-[80vh] px-4">
+    <div class="bg-white/95 backdrop-blur-sm w-full max-w-md p-10 rounded-3xl shadow-2xl border border-white/50 flex flex-col items-center">
+        
+        <div class="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
+            <span class="material-symbols-outlined text-blue-700 text-4xl">lock_open</span>
+        </div>
+        
+        <h1 style="font-family: 'Unica One', sans-serif;" class="text-4xl font-bold text-blue-800 tracking-tight uppercase mb-2">
+            Administrator
+        </h1>
+        <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-8">Secure Portal Access</p>
+
+        <form method="POST" action="{{ url_for('login') }}" class="w-full space-y-5">
+            <div>
+                <label class="text-[10px] font-bold text-blue-700 uppercase ml-2 mb-1 block">Admin ID / Code</label>
+                <input type="text" name="admin_code" required
+                       class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-700 focus:bg-white outline-none transition-all placeholder:text-gray-300"
+                       placeholder="Enter your authorized code">
+            </div>
+
+            <div>
+                <label class="text-[10px] font-bold text-blue-700 uppercase ml-2 mb-1 block">Security Password</label>
+                <input type="password" name="password" required
+                       class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-700 focus:bg-white outline-none transition-all placeholder:text-gray-300"
+                       placeholder="••••••••">
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-blue-700 text-white py-4 rounded-xl font-black uppercase tracking-widest shadow-lg hover:bg-blue-800 hover:-translate-y-1 active:scale-95 transition-all duration-200">
+                Authorize Login
+            </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 w-full text-center">
+            <p class="text-xs text-gray-400 leading-relaxed italic">
+                Authorized personnel only. All access attempts are logged and monitored for security purposes.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
